@@ -62,7 +62,7 @@ create table brand
     
 create table vendor
 	(
-    ven_name varchar(15),
+    ven_name varchar(25),
     service_num varchar(12),
     primary key (ven_name)
     );
