@@ -20,6 +20,7 @@ insert into product values ('44433312', '012345678925', '', '', '', '');
 insert into product values ('00123476', '009876909095', '', '', '', '');
 insert into product values ('12007645', '055050943218', '', '', '', '');
 insert into product values ('89120112', '055443338985', '', '', '', '');
+#hdlloooooo
 insert into store values ('150', '', 'Groton', 'CT', '06340', '', '');
 insert into brand values ('', '');
 insert into vendor values ('', '');
