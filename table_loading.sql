@@ -7,6 +7,25 @@ create table customer
     last_name varchar(15),
     primary key (customer_id)
     );
+
+create table store
+	(
+    address_num numeric(4,0),
+    street varchar(10),
+    city varchar(10),
+    state varchar(2),
+    zip numeric(5,0),
+    open_time time,
+    close_time time,
+    primary key (address_num, street, city, state, zip)
+    );
+    
+create table vendor
+	(
+    ven_name varchar(15),
+    service_num varchar(12),
+    primary key (ven_name)
+    );
     
 create table trans
 	(
@@ -21,11 +40,15 @@ create table trans
     state varchar(2),
     zip numeric(5,0),
     primary key (transaction_num),
-    foreign key (address_num) references store (address_num),
-    foreign key (street) references store (street),
-    foreign key (city) references store (city),
-    foreign key (state) references store (state),
-    foreign key (zip) references store (zip)
+    foreign key (address_num, street, city, state, zip) references store (address_num, street, city, state, zip)
+    );
+    
+create table brand
+	(
+    brand_name varchar(15),
+    ven_name varchar(15),
+    primary key (brand_name),
+    foreign key (ven_name) references vendor (ven_name)
     );
     
 create table product
@@ -38,33 +61,6 @@ create table product
     brand_name varchar(12),
     primary key (product_id),
     foreign key (brand_name) references brand (brand_name)
-    );
-    
-create table store
-	(
-    address_num numeric(4,0),
-    street varchar(10),
-    city varchar(10),
-    state varchar(2),
-    zip numeric(5,0),
-    open_time time,
-    close_time time,
-    primary key (address_num, street, city, state, zip)
-    );
-    
-create table brand
-	(
-    brand_name varchar(15),
-    ven_name varchar(15),
-    primary key (brand_name),
-    foreign key (ven_name) references vendor (ven_name)
-    );
-    
-create table vendor
-	(
-    ven_name varchar(15),
-    service_num varchar(12),
-    primary key (ven_name)
     );
     
 create table member
@@ -88,12 +84,7 @@ create table inventory
     quantity_ordered numeric(2,0),
     restock_value numeric(2,0),
     primary key (address_num, street, city, state, zip, product_id),
-	foreign key (address_num) references store (address_num),
-    foreign key (street) references store (street),
-    foreign key (city) references store (city),
-    foreign key (state) references store (state),
-    foreign key (zip) references store (zip),
-    foreign key (product_id) references product (product_id)
+    foreign key (address_num, street, city, state, zip) references store (address_num, street, city, state, zip)
     );
     
 create table purchased
@@ -123,12 +114,7 @@ create table sells_to
     state varchar(2),
     zip numeric(5,0),
     primary key (ven_name, address_num, street, city, state, zip),
-    foreign key (ven_name) references vendor (ven_name),
-	foreign key (address_num) references store (address_num),
-    foreign key (street) references store (street),
-    foreign key (city) references store (city),
-    foreign key (state) references store (state),
-    foreign key (zip) references store (zip)
+    foreign key (address_num, street, city, state, zip) references store (address_num, street, city, state, zip)
     );
     
 create table appliance
