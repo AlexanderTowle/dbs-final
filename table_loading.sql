@@ -84,7 +84,8 @@ create table inventory
     quantity_ordered numeric(2,0),
     restock_value numeric(2,0),
     primary key (address_num, street, city, state, zip, product_id),
-    foreign key (address_num, street, city, state, zip) references store (address_num, street, city, state, zip)
+    foreign key (address_num, street, city, state, zip) references store (address_num, street, city, state, zip),
+	foreign key (product_id) references product (product_id)
     );
     
 create table purchased
