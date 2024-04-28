@@ -58,7 +58,7 @@ create table product
     size varchar(15),
     packaging_type varchar(12),
     product_type varchar(12),
-    brand_name varchar(12),
+    brand_name varchar(15),
     primary key (product_id),
     foreign key (brand_name) references brand (brand_name)
     );
