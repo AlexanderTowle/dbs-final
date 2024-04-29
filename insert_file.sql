@@ -12,7 +12,7 @@ insert into trans values ('00000005', '2.94', '1234-5555-7893-0111', '2024-03-28
 insert into trans values ('00000006', '39.88', '8765-0909-4444-0333', '2024-04-01','123', 'High St', 'Boston', 'MA', '02120');
 insert into trans values ('00000007', '9.95', '1234-5555-7893-0111', '2023-12-28','67', 'Bank St', 'Austin', 'TX', '78707');
 insert into trans values ('00000008', '459.99', '0044-4246-9843-0509', '2024-01-31','57', 'Grove St', 'Portland', 'OR', '97035');
-insert into trans values ('00000009', '11.00', '8609-6146-6666-4201', '2024-02-12','57', 'Grove St', 'Portland', 'OR', '97035');
+insert into trans values ('00000009', '12.50', '8609-6146-6666-4201', '2024-02-12','57', 'Grove St', 'Portland', 'OR', '97035');
 insert into trans values ('000000010', '9.95', '4312-7761-1413-0077', '2023-10-23','87', 'Main St', 'Boston', 'MA', '02112');
 insert into product values ('12345678', '012345678915', '2 Liter', 'Plastic', 'Soda', 'Coca-Cola');#bev,soda
 insert into product values ('23456789', '089345543215', '1 Gallon', 'Plastic', 'Milk', 'Fairlife');
@@ -68,7 +68,7 @@ insert into inventory values ('23', 'Travis St', 'Houston', 'TX', '77080', '8765
 insert into inventory values ('123', 'High St', 'Boston', 'MA', '02112', '87690012', '5', '39.88', '8', '10');
 insert into inventory values ('67', 'Bank St', 'Austin', 'TX', '78707', '87654321', '34', '9.95', '16', '40');
 insert into inventory values ('57', 'Grove St', 'Portland', 'OR', '97035', '56722123', '3', '459.99', '12', '10');
-insert into inventory values ('57', 'Grove St', 'Portland', 'OR', '97035', '44433312', '22', '11.00', '18', '35');
+insert into inventory values ('57', 'Grove St', 'Portland', 'OR', '97035', '44433312', '22', '12.50', '18', '35');
 insert into purchased values ('00000001', '00437650');#trans_id and cust_id
 insert into purchased values ('00000002', '00437650');
 insert into purchased values ('00000003', '00428232');
