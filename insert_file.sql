@@ -20,7 +20,7 @@ insert into product values ('87654321', '009123321435', '1 Liter', 'Plastic', 'D
 insert into product values ('44433312', '012345678925', '500 mg', 'Plastic', 'Acetaminophen', 'Tylenol');
 insert into product values ('00123476', '009876909095', '11 oz', 'Plastic', 'Dishwasher Pods', 'Cascade');
 insert into product values ('12007645', '055050943218', '5 lb', 'Plastic', 'Poultry', 'Tyson');#food,meat,comestible
-insert into product values ('87654321', '009123321435', '18 Fl Oz', 'Plastc', 'Dish Soap', 'Dawn Ultra');
+insert into product values ('87654323', '009123321435', '18 Fl Oz', 'Plastc', 'Dish Soap', 'Dawn Ultra');
 insert into product values ('98788890', '009123321895', '5 lb', 'Stainless Steal', 'Blender', 'Magic Bullet'); #appliances
 insert into product values ('56722123', '029123371435', '66 lb', 'Metal', 'Lawn Mower', 'PowerSmart');#gas
 insert into product values ('87690012', '099123321435', '2 lb', 'Stainless Steal', 'Hand Mixer', 'KitchenAid');#electric
@@ -64,7 +64,7 @@ insert into inventory values ('270', 'Mohegan Ave', 'New London', 'CT', '06320',
 insert into inventory values ('270', 'Mohegan Ave', 'New London', 'CT', '06320', '00123476', '20', '12.50', '15', '30');
 insert into inventory values ('87', 'Main St', 'Boston', 'MA', '02112', '22990989', '10', '15.00', '10', '20');
 insert into inventory values ('87', 'Main St', 'Boston', 'MA', '02112', '87654321', '29', '9.95', '20', '40');
-insert into inventory values ('23', 'Travis St', 'Houston', 'TX', '77080', '87654321', '20', '2.94', '8', '25');
+insert into inventory values ('23', 'Travis St', 'Houston', 'TX', '77080', '87654323', '20', '2.94', '8', '25');
 insert into inventory values ('123', 'High St', 'Boston', 'MA', '02112', '87690012', '5', '39.88', '8', '10');
 insert into inventory values ('67', 'Bank St', 'Austin', 'TX', '78707', '87654321', '34', '9.95', '16', '40');
 insert into inventory values ('57', 'Grove St', 'Portland', 'OR', '97035', '56722123', '3', '459.99', '12', '10');
@@ -85,7 +85,7 @@ insert into ordered values ('12345678', '00000002');
 insert into ordered values ('44433312', '00000003');
 insert into ordered values ('00123476', '00000003');
 insert into ordered values ('22990989', '00000004');
-insert into ordered values ('87654321', '00000005');
+insert into ordered values ('87654323', '00000005');
 insert into ordered values ('87690012', '00000006');
 insert into ordered values ('87654321', '00000007');
 insert into ordered values ('56722123', '00000008');
@@ -120,8 +120,8 @@ insert into comestible values ('12789887', '0');#lettuce
 insert into meat values ('12007645', '0');
 insert into produce values ('12789887', '1');
 insert into other values ('22990989');
-insert into cleaner values ('87654321', 'Dishwashing');#dish soap
+insert into cleaner values ('87654323', 'Dishwashing');#dish soap
 insert into cleaner values ('00123476', 'Dishwashing');#dish pods
 insert into dry_clean values ('00123476', '221');
-insert into wet_clean values ('87654321', '100');
+insert into wet_clean values ('87654323', '100');
 insert into drug values ('44433312', '500');
