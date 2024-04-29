@@ -104,8 +104,11 @@ insert into sells_to values ('Procter & Gamble', '67', 'Bank St', 'Austin', 'TX'
 insert into sells_to values ('Amerisun Inc.', '57', 'Grove St', 'Portland', 'OR');
 insert into sells_to values ('Johnson & Johnson', '57', 'Grove St', 'Portland', 'OR');
 insert into appliance values ('98788890', 'Kitchen');#blender
+insert into appliance values ('56722123', 'Outdoor');
+insert into appliance values ('87690012', 'Kitchen');
 insert into gas values ('56722123', '170cc');#lawn mower
 insert into electric values('87690012', '200');#hand mixer
+insert into electric values ('98788890', 'Kitchen');
 #calories for food are per serving
 insert into food values('12007645', '200');#tyson chicken
 insert into food values('12789887', '10');#lettuce
