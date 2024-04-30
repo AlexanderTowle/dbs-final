@@ -58,7 +58,7 @@ create table product
     size varchar(15),
     packaging_type varchar(12),
     product_type varchar(12),
-    brand_name varchar(15),
+    brand_name varchar(12),
     primary key (product_id),
     foreign key (brand_name) references brand (brand_name)
     );
@@ -85,7 +85,7 @@ create table inventory
     restock_value numeric(2,0),
     primary key (address_num, street, city, state, zip, product_id),
     foreign key (address_num, street, city, state, zip) references store (address_num, street, city, state, zip),
-	foreign key (product_id) references product (product_id)
+    foreign key (product_id) references product (product_id)
     );
     
 create table purchased
@@ -247,3 +247,14 @@ create table drug
     primary key (product_id),
     foreign key (product_id) references product (product_id)
     );
+    
+alter table customer modify email varchar(30);
+alter table store modify street varchar(30);
+alter table trans modify street varchar(30);
+alter table inventory modify street varchar(30);
+alter table sells_to modify street varchar(30);
+alter table vendor modify ven_name varchar(30);
+alter table brand modify ven_name varchar(30);
+alter table sells_to modify ven_name varchar(30);
+alter table product modify product_type varchar(30);
+alter table product modify packaging_type varchar(30);
