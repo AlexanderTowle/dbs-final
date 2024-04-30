@@ -72,10 +72,12 @@ insert into inventory values ('270', 'Mohegan Ave', 'New London', 'CT', '06320',
 insert into inventory values ('87', 'Main St', 'Boston', 'MA', '02112', '22990989', '10', '15.00', '10', '20');
 insert into inventory values ('87', 'Main St', 'Boston', 'MA', '02112', '87654321', '29', '9.95', '20', '40');
 insert into inventory values ('23', 'Travis St', 'Houston', 'TX', '77080', '87654323', '20', '2.94', '8', '25');
+insert into inventory values ('23', 'Travis St', 'Houston', 'TX', '77080', '23456789', '10', '3.00', '8', '15');
 insert into inventory values ('123', 'High St', 'Boston', 'MA', '02112', '87690012', '5', '39.88', '8', '10');
 insert into inventory values ('67', 'Bank St', 'Austin', 'TX', '78707', '87654321', '34', '9.95', '16', '40');
 insert into inventory values ('57', 'Grove St', 'Portland', 'OR', '97035', '56722123', '3', '459.99', '12', '10');
 insert into inventory values ('57', 'Grove St', 'Portland', 'OR', '97035', '44433312', '22', '12.50', '18', '35');
+
 
 insert into purchased values ('00000001', '00437650');#trans_id and cust_id
 insert into purchased values ('00000002', '00437650');
