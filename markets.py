@@ -6,7 +6,7 @@ class OLAPInterface:
         self.cnx = cnx
         self.commands = {
             "pivot": self.pivot,
-            #"cube": self.cube,
+            "cube": self.cube,
             # "rollup": self.rollup,
             "help": self.display_help,
             "exit": self.exit_interface
@@ -26,7 +26,7 @@ class OLAPInterface:
 
     def pivot(self, *args):
         if len(args) != 3:
-            print("Please enter using the following format: pivot <table_name> <dimension1> (optional) <dimension2> <measure>")
+            print("Please enter using the following format: pivot your_table d1 d2 num_col")
             return
     
         #table_name, dimension1, dimension2, measure = args #for 2 dimensions
@@ -45,14 +45,34 @@ class OLAPInterface:
         result = cursor.fetchall()
         cursor.close()
 
-        print("Pivot result:")
+        for row in result:
+            print(row)
+            
+    def cube(self, *args):
+        if len(args) < 4:
+            print("Please enter using the following format: cube your_table d1 d2 num_col") #using 3 dims, could go to 2, num_col is for numerical column
+            return
+    
+        table_name, dimensions, measure = args[0], args[1:-1], args[-1]
+        table_name = f"`{table_name}`"  
+    
+        print(f"Generating cube for {', '.join(dimensions)}, and calculating {measure}")
+    
+        select_clause = ", ".join(dimensions) #create a select variable to specify which values are retrieved
+        group_by_clause = ", ".join(dimensions)
+        cube_query = f"select {select_clause}, sum({measure}) from {table_name} group by {group_by_clause};" #create the cube query using the vars
+        cursor = self.cnx.cursor()
+        cursor.execute(cube_query)
+        result = cursor.fetchall()
+        cursor.close()
+
         for row in result:
             print(row)
 
     def display_help(self):
         print("Available Commands:")
         print("1. pivot")
-        #print("2. cube")
+        print("2. cube")
         #print("3. rollup")
         print("4. help (display available commands)")
         print("5. exit\n")
