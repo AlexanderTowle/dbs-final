@@ -53,14 +53,20 @@ class OLAPInterface:
             print("Please enter using the following format: cube your_table d1 d2 num_col") #using 3 dims, could go to 2, num_col is for numerical column
             return
     
-        table_name, dimensions, measure = args[0], args[1:-1], args[-1]
+        table_name, dim1, dim2, measure = args[0], args[1], args[2], args[-1]
         table_name = f"`{table_name}`"  
-    
-        print(f"Generating cube for {', '.join(dimensions)}, and calculating {measure}")
-    
-        select_clause = ", ".join(dimensions) #create a select variable to specify which values are retrieved
-        group_by_clause = ", ".join(dimensions)
-        cube_query = f"select {select_clause}, sum({measure}) from {table_name} group by {group_by_clause};" #create the cube query using the vars
+
+        cube_query = (
+                        f"select {dim1}, {dim2}, "
+                        f"sum({measure}) as total "
+                        f"from {table_name} "
+                        f"group by {dim1}, {dim2} with rollup "  # Ensure space here
+                        f"union "  #union since cube doesnt work on mysql
+                        f"select 'null', {dim2}, sum({measure}) as total " #null depending on num of cols
+                        f"from {table_name} "
+                        f"group by {dim2};")
+
+        #create the cube query using the vars
         cursor = self.cnx.cursor()
         cursor.execute(cube_query)
         result = cursor.fetchall()
