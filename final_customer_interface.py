@@ -66,8 +66,8 @@ try:
                     inventory_cursor.execute(upc_query, (id,))
                     upc_result = inventory_cursor.fetchall()
                     actual_upc = str(upc_result[0][0])
-                    decrement_query = "update inventory set amount_stocked = amount_stocked - 1 where product_id in (select product_id from product where UPC = %s) and address_num = %s and street = %s and city = %s and state = %s and zip = %s"
-                    inventory_cursor.execute(decrement_query, (actual_upc, address_num, street, city, state, zip))
+                    delete_inventory_query = "delete from inventory where product_id = %s and address_num = %s and street = %s and city = %s and state = %s and zip = %s"
+                    inventory_cursor.execute(delete_inventory_query, (id, address_num, street, city, state, zip))
                 print("\nYour total is $" + str(total))
                 inventory_cursor.close()
                 break
