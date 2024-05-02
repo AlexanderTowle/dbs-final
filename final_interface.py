@@ -27,7 +27,7 @@ try:
 
             #Create cursor and query to get the products available at that store
             address_cursor = cnx.cursor()
-            address_query = "select p.product_type, p.product_id, i.price from inventory i join product p on (i.product_id = p.product_id) where address_num = %s and street = %s and city = %s and state = %s and zip = %s"
+            address_query = "select p.product_type, p.product_id, p.base_price * s.price_scale as scaled_price from inventory i join product p on (i.product_id = p.product_id) join store s on (i.address_num = s.address_num and i.street = s.street and i.city = s.city and i.state = s.state and i.zip = s.zip) where i.address_num = %s and i.street = %s and i.city = %s and i.state = %s and i.zip = %s and i.amount_stocked > 0"
             address_cursor.execute(address_query, (address_num, street, city, state, zip))
 
             #Results
@@ -47,6 +47,8 @@ try:
 
         #cart holds product_ids 
         cart = []
+        #cart_upc holds upcs of items in the cart
+        cart_upc = []
         #Keep track of the total cost
         total = 0.00
         print("Please enter the product IDs of the products you would like to purchase one at a time. When you are finished please type \"Checkout\".\n")
@@ -54,11 +56,20 @@ try:
         while True:
             product = input()
             if product.lower() == "checkout":
+                inventory_cursor = cnx.cursor()
                 #Check against the items in the store to fetch the data for what is being bought and add to total cost
                 for item in address_results:
                     if str(item[1]) in cart:
                         total += float(item[2])
+                for id in cart:
+                    upc_query = "select UPC from product where product_id = %s"
+                    inventory_cursor.execute(upc_query, (id,))
+                    upc_result = inventory_cursor.fetchall()
+                    actual_upc = str(upc_result[0][0])
+                    decrement_query = "update inventory set amount_stocked = amount_stocked - 1 where product_id in (select product_id from product where UPC = %s) and address_num = %s and street = %s and city = %s and state = %s and zip = %s"
+                    inventory_cursor.execute(decrement_query, (actual_upc, address_num, street, city, state, zip))
                 print("\nYour total is $" + str(total))
+                inventory_cursor.close()
                 break
             #add product_id to cart
             else:
@@ -87,7 +98,7 @@ try:
                 ordered_cursor = cnx.cursor()
                 #add to the ordered table for every item ordered in a single transaction
                 for product in cart:
-                    ordered_query = "insert int ordered values (%s, %s)"
+                    ordered_query = "insert into ordered values (%s, %s)"
                     ordered_cursor.execute(ordered_query, (product, new_trans_num))
                 cnx.commit()
                 trans_cursor.close()
