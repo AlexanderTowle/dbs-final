@@ -1,5 +1,6 @@
 #dba interface
 use com303fpad;
+select * from sells_to;
 #query test from professor
 select c.first_name, c.last_name, s.street, s.city, s.state, s.zip, t.transaction_date, p.base_price, 
 count(*) as quantity_bought 

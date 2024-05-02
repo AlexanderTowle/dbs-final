@@ -24,21 +24,16 @@ class OLAPInterface:
                 print("Invalid command. Type 'help' for available commands.")
 
     def pivot(self, *args):
-        if len(args) != 3:
-            print("Please enter using the following format: pivot your_table d1 d2 num_col")
+        if len(args) != 4:
+            print("Please enter using the following format: pivot your_table d1 d2 num_col")#takes 2 args
             return
     
-        #table_name, dimension1, dimension2, measure = args #for 2 dimensions
-        table_name, dimension1, measure = args
+        table_name, dimension1, dimension2, measure = args #for 2 dimensions
         table_name = f"`{table_name}`" #table input is user friendly
-    
-        #print(f"Pivoting on table {table_name} by {dimension1}, {dimension2}, and calculating {measure}") #for 2 dimensions
-        print(f"Pivoting on table {table_name} by {dimension1}, and calculating {measure}")
     
         #constructing the pivot query
         #pivot command doesnt work on sql, so use sum
-        #pivot_query = f"select {dimension1}, {dimension2}, sum({measure}) from {table_name} group by {dimension1}, {dimension2};" #for 2 dims
-        pivot_query = f"select {dimension1}, sum({measure}) from {table_name} group by {dimension1};"
+        pivot_query = f"select {dimension1}, {dimension2}, sum({measure}) from {table_name} group by {dimension1}, {dimension2};" #for 2 dims
         cursor = self.cnx.cursor()
         cursor.execute(pivot_query)
         result = cursor.fetchall()
@@ -47,7 +42,6 @@ class OLAPInterface:
         for row in result:
             print(row)
        
-            #####YAY RHIS WORKS  :DDDDDDDDDDDD
     def cube(self, *args):
         if len(args) < 4:
             print("Please enter using the following format: cube your_table d1 d2 num_col") #using 3 dims, could go to 2, num_col is for numerical column
@@ -79,7 +73,6 @@ class OLAPInterface:
         print("Available Commands:")
         print("1. pivot")
         print("2. cube")
-        #print("3. rollup")
         print("4. help (display available commands)")
         print("5. exit\n")
 
