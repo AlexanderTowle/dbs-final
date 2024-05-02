@@ -7,7 +7,6 @@ class OLAPInterface:
         self.commands = {
             "pivot": self.pivot,
             "cube": self.cube,
-            # "rollup": self.rollup,
             "help": self.display_help,
             "exit": self.exit_interface
         }
@@ -47,7 +46,8 @@ class OLAPInterface:
 
         for row in result:
             print(row)
-            
+       
+            #####YAY RHIS WORKS  :DDDDDDDDDDDD
     def cube(self, *args):
         if len(args) < 4:
             print("Please enter using the following format: cube your_table d1 d2 num_col") #using 3 dims, could go to 2, num_col is for numerical column
