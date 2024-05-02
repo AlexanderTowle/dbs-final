@@ -18,16 +18,10 @@ try:
                 #Stuff that needs restocking
                 inventory_cursor = cnx.cursor()
                 inventory_query = """
-                SELECT i.address_num, i.street, i.city, i.state, i.zip, p.UPC, s.restock_value, 
-                    s.quantity_ordered, COUNT(p.UPC) as upc_count, p.size, p.packaging_type, 
-                    p.product_type, p.brand_name, p.base_price 
-                FROM inventory i 
-                JOIN product p ON i.product_id = p.product_id 
-                JOIN store s ON i.address_num = s.address_num AND i.street = s.street AND 
-                                i.city = s.city AND i.state = s.state AND i.zip = s.zip 
-                GROUP BY i.address_num, i.street, i.city, i.state, i.zip, p.UPC, p.size, 
-                        p.packaging_type, p.product_type, p.brand_name, p.base_price 
-                HAVING upc_count < s.restock_value
+                select i.address_num, i.street, i.city, i.state, i.zip, p.UPC, s.restock_value, s.quantity_ordered, count(p.UPC) as upc_count, p.size, p.packaging_type, p.product_type, p.brand_name, p.base_price 
+                from inventory i join product p on (i.product_id = p.product_id) join store s on i.address_num = s.address_num and i.street = s.street and i.city = s.city and i.state = s.state and i.zip = s.zip 
+                group by i.address_num, i.street, i.city, i.state, i.zip, p.UPC, p.size, p.packaging_type, p.product_type, p.brand_name, p.base_price 
+                having upc_count < s.restock_value
                 """
                 inventory_cursor.execute(inventory_query)
                 restocking = inventory_cursor.fetchall()
