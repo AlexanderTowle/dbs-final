@@ -13,7 +13,7 @@ try:
             current_datetime = datetime.now()
             current_date = datetime.now().date()
             #Only update at specified time
-            if current_datetime.hour == 5 and current_datetime.minute == 10:
+            if current_datetime.hour == 0 and current_datetime.minute == 0:
                 print("restock")
                 #Stuff that needs restocking
                 inventory_cursor = cnx.cursor()
