@@ -1,7 +1,7 @@
 #dba interface
 use com303fpad;
-select * from inventory;
-SELECT * FROM product;
+select * from product;
+SELECT * FROM brand;
 #query test from professor
 select c.first_name, c.last_name, s.street, s.city, s.state, s.zip, t.transaction_date, p.base_price, 
 count(*) as quantity_bought 
@@ -109,8 +109,7 @@ limit
     5;
     
 #what if we wanna add a new product to a store. here's the dba's query:
-insert into product (product_id, upc, size, packaging_type, product_type, base_price)
-values ('89988998', '089345533255', '4 oz', 'Metal', 'Dairy', '1.67');
+insert into product (product_id, upc, size, packaging_type, product_type, base_price) values ('89988998', '089345533255', '4 oz', 'Metal', 'Dairy', '1.67');
 insert into inventory (address_num, street, city, state, zip, product_id, amount_stocked)
 values ('12', 'Bank St', 'New London', 'CT', '06320', '89988998', '5');
 insert into sells_to (ven_name, address_num, street, city, state, zip)
@@ -125,3 +124,32 @@ join store s on st.address_num = s.address_num
             and st.city = s.city 
             and st.state = s.state 
             and st.zip = s.zip;
+SELECT 
+    c.first_name,
+    c.last_name,
+    s.street,
+    s.city,
+    s.state,
+    s.zip,
+    t.transaction_date,
+    p.product_id,
+    p.base_price,
+    COUNT(*) AS quantity_bought
+FROM 
+    customer c
+JOIN 
+    purchased pu ON c.customer_id = pu.customer_id
+JOIN 
+    trans t ON pu.transaction_num = t.transaction_num
+JOIN 
+    sells_to st ON t.address_num = st.address_num 
+JOIN 
+    store s ON st.address_num = s.address_num 
+JOIN 
+    ordered o ON t.transaction_num = o.transaction_num
+JOIN 
+    product p ON o.product_id = p.product_id
+GROUP BY 
+    c.customer_id, 
+    t.transaction_num,
+    p.product_id;
