@@ -5,7 +5,7 @@ def connect_to_database(host, user, password, database):#create a function to co
     try:
         cnx = mysql.connector.connect(user='com303dsandoval', password='ds8498ds',
                                       host='136.244.224.221',
-                                      database='com303fpad')
+                                      database='com303fpad', autocommit=True)
         if cnx.is_connected():
             return cnx
     except Error as e:
@@ -26,17 +26,20 @@ def main():
     if cnx is None:
         return
 
-    #get user/dba query input
-    query = input("Please enter your SQL query: ")
+    while True:
+        query = input("Hello Database Admin! Please enter your SQL query: ") #get user/dba query input
 
-    results = execute_query(cnx, query)
-    if results is not None:
-        #return the results
-        for row in results:
-            print(row)
+        results = execute_query(cnx, query)
+        if results is not None:
+            for row in results:
+                print(row)
+            print("Action has successfully executed!")
 
-    cnx.close()
-    print("Now disconnecting from the database. Goodbye")
+            exit_choice = input("Do you want to exit? (yes/no): ").lower()
+            if exit_choice == "yes":
+                print("Now disconnecting from the database. Goodbye")
+                cnx.close()
+                return
 
 if __name__ == "__main__":
     main()

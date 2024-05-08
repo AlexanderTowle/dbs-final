@@ -15,13 +15,14 @@ class OLAPInterface:
         print("Hello, welcome to Walmart! \nThis program runs various OLAP queries (ie pivot, cube, rollup)\n")
         self.display_help()
         while True:
-            command = input("Enter the command (pivot, cube, rollup): ").strip().split()
+            command = input("Enter the command: ").strip().split()
             if not command:
                 continue
             if command[0] in self.commands:
                 self.commands[command[0]](*command[1:])
             else:
                 print("Invalid command. Type 'help' for available commands.")
+
 
     def pivot(self, *args):
         if len(args) != 4:
@@ -41,6 +42,10 @@ class OLAPInterface:
 
         for row in result:
             print(row)
+        
+        exit_choice = input("Do you want to exit? (yes/no): ").lower()
+        if exit_choice == "yes":
+            self.exit_interface()
        
     def cube(self, *args):
         if len(args) < 4:
@@ -68,16 +73,20 @@ class OLAPInterface:
 
         for row in result:
             print(row)
+        
+        exit_choice = input("Do you want to exit? (yes/no): ").lower()
+        if exit_choice == "yes":
+            self.exit_interface()
 
     def display_help(self):
-        print("Available Commands:")
-        print("1. pivot")
-        print("2. cube")
-        print("4. help (display available commands)")
-        print("5. exit\n")
+        print("Available commands:")
+        print("-pivot")
+        print("-cube")
+        print("-help (display available commands)")
+        print("-exit\n")
 
     def exit_interface(self):
-        print("Bye!")
+        print("Thank you. Bye!")
         self.cnx.close()
         exit()
 
