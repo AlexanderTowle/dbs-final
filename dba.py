@@ -22,12 +22,7 @@ def execute_query(cnx, query):
         return None
 
 def main():
-    host = '136.244.224.221'
-    user = 'com303dsandoval'
-    password = 'ds8498ds'
-    database = 'com303fpad'
-
-    cnx = connect_to_database(host, user, password, database)
+    cnx = connect_to_database('136.244.224.221', 'com303dsandoval', 'ds8498ds', 'com303fpad')
     if cnx is None:
         return
 
