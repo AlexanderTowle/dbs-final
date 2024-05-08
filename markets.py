@@ -54,7 +54,7 @@ class OLAPInterface:
                         f"select {dim1}, {dim2}, "
                         f"sum({measure}) as total "
                         f"from {table_name} "
-                        f"group by {dim1}, {dim2} with rollup "  # Ensure space here
+                        f"group by {dim1}, {dim2} with rollup "
                         f"union "  #union since cube doesnt work on mysql
                         f"select 'null', {dim2}, sum({measure}) as total " #null depending on num of cols
                         f"from {table_name} "

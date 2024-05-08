@@ -3,7 +3,7 @@ from mysql.connector import Error
 
 def connect_to_database(host, user, password, database):#create a function to connect, gives error if failed
     try:
-        cnx = mysql.connector.connect(user='com303atowle', password='at2289at',
+        cnx = mysql.connector.connect(user='com303dsandoval', password='ds8498ds',
                                       host='136.244.224.221',
                                       database='com303fpad')
         if cnx.is_connected():
@@ -16,10 +16,9 @@ def execute_query(cnx, query):
     try:
         cursor = cnx.cursor()
         cursor.execute(query)
-        print("Query executed successfully!!!")
         return cursor.fetchall()
     except Error as e:
-        print("Error executing query:", e)
+        print("An error occurred:", e)
         return None
 
 def main():
