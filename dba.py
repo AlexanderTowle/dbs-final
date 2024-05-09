@@ -1,45 +1,45 @@
 import mysql.connector
 from mysql.connector import Error
 
-def connect_to_database(host, user, password, database):#create a function to connect, gives error if failed
+def main():
+    #try to connect to db
     try:
         cnx = mysql.connector.connect(user='com303dsandoval', password='ds8498ds',
                                       host='136.244.224.221',
                                       database='com303fpad', autocommit=True)
         if cnx.is_connected():
-            return cnx
+            print("Successfully connected to the database")
+
+            while True:
+                #give prompt for user input
+                query = input("\nHello Database Admin! Please enter your SQL query/action: ")
+
+                #try executing the action
+                try:
+                    cursor = cnx.cursor()
+                    cursor.execute(query)
+                    results = cursor.fetchall()
+
+                    #if successful print result
+                    if results:
+                        for row in results:
+                            print(row)
+                        print("Action has successfully executed!")
+                    #let dba know it still executed if no results
+                    else:
+                        print("Query executed successfully.")
+                except Error as e:
+                    print("An error ocurred", e)
+
+                #give user option to quit or keep doing stuff
+                exit_choice = input("\nDo you want to exit? (yes/no): ").lower()
+                if exit_choice == "yes":
+                    print("Now disconnecting from the database. Goodbye!")
+                    cnx.close()
+                    break
+                
     except Error as e:
         print("There was an error connecting to the database:", e)
-        return None
-
-def execute_query(cnx, query):
-    try:
-        cursor = cnx.cursor()
-        cursor.execute(query)
-        return cursor.fetchall()
-    except Error as e:
-        print("An error occurred:", e)
-        return None
-
-def main():
-    cnx = connect_to_database('136.244.224.221', 'com303dsandoval', 'ds8498ds', 'com303fpad')
-    if cnx is None:
-        return
-
-    while True:
-        query = input("Hello Database Admin! Please enter your SQL query: ") #get user/dba query input
-
-        results = execute_query(cnx, query)
-        if results is not None:
-            for row in results:
-                print(row)
-            print("Action has successfully executed!")
-
-            exit_choice = input("Do you want to exit? (yes/no): ").lower()
-            if exit_choice == "yes":
-                print("Now disconnecting from the database. Goodbye")
-                cnx.close()
-                return
 
 if __name__ == "__main__":
     main()
