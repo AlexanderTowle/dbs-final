@@ -1,6 +1,6 @@
 import mysql.connector
 from mysql.connector import Error
-
+#create class for the 2 olap qrs
 class OLAPInterface:
     def __init__(self, cnx):
         self.cnx = cnx
@@ -21,7 +21,7 @@ class OLAPInterface:
             if command[0] in self.commands:
                 self.commands[command[0]](*command[1:])
             else:
-                print("Invalid command. Type 'help' for available commands.")
+                print("Invalid command. Type 'help' for available commands")
 
 
     def pivot(self, *args):
