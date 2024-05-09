@@ -14,13 +14,10 @@ join store s on st.address_num = s.address_num
             and st.zip = s.zip;
 
 The database administrator must write the action in one singular line, so it should look like this instead:
-  
+
 select v.ven_name, s.address_num, s.street, s.city, s.state, s.zip from sells_to st join vendor v on st.ven_name = v.ven_name join store s on st.address_num = s.address_num and st.street = s.street and st.city = s.city and st.state = s.state and st.zip = s.zip;
 
 The database administrator is then told that their action was successfully ran, otherwise an error message appears in the terminal.
-
-
-
 
 Instructions for the markets interface (to run OLAP queries): The markets interface to run OLAP queries is called markets.py. The interface gives the user the option to run CUBE or PIVOT operators that aren’t supported by MySQL. Once entered on the command line, the user is given a welcome message and has the option to execute either a PIVOT/CUBE operator on their desired table. The PIVOT operator transforms row-level data into columns based on aggregate functions. In this program, the user has the option to pick which table to perform the action for using the format ‘pivot your_table d1 d2 num_col’. The same logic applies to CUBE. The user is limited to two chosen columns from the chosen table to analyze and one numerical column to perform a summation.
 
